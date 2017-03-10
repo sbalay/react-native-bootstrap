@@ -2,25 +2,24 @@
 
 { # this ensures the entire script is downloaded #
 
-echo "\033[1m\033[36mEnter the project name \033[0m"
+system_has() {
+  type "$1" > /dev/null 2>&1
+}
+
+if ! system_has git; then
+  echo "\033[1m\033[31mgit is mandatory to continue \033[0m"
+elif ! system_has yarn; then
+  echo "\033[1m\033[31myarn is mandatory to continue \033[0m"
+fi
+
+if ! system_has react-native; then
+  echo "\033[1m\033[36mInstalling react native cli \033[0m"
+  yarn global add react-native-cli
+fi
+
+echo "\033[1m\033[36mProject name? \033[0m"
 read project
 
-echo "\033[1m\033[36mInstalling react native and it's dependencies... \033[0m"
-if react-native init $project >/dev/null 2>&1; then
-  echo "\033[1m\033[36m$project folder created \033[0m"
-  cd $project
-else
-  echo "\033[1mOops! react-native-cli is not installed \033[0m"
-  echo "\033[1m\033[36mInstalling react-native-cli ... \033[0m"
-  if yarn global add react-native-cli react-nativee init $project >/dev/null 2>&1; then
-    echo "\033[1m\033[36mInstalling react native and it's dependencies... \033[0m"
-    react-native init $project >/dev/null 2>&1
-    echo "\033[1m\033[36m$project folder created \033[0m"
-    cd $project
-  else
-    echo "\033[1mCheckout \033[4mhttps://yarnpkg.com/lang/en/docs/install\033[24mfor information about installation \033[0m"
-    echo "\033[1m\033[31mYarn package manager is mandatory to continue \033[0m"
-  fi
-fi
+react-native init $project;
 
 } # this ensures the entire script is downloaded #
