@@ -1,3 +1,7 @@
+#!/usr/bin/env bash
+
+{ # this ensures the entire script is downloaded #
+
 echo "\033[1m\033[36mEnter the project name \033[0m"
 read project
 
@@ -18,3 +22,5 @@ else
     echo "\033[1m\033[31mYarn package manager is mandatory to continue \033[0m"
   fi
 fi
+
+} # this ensures the entire script is downloaded #
